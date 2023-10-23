@@ -25,6 +25,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.bcan.satelliteexplorer.presentation.ui.SatelliteContent
+import com.bcan.satelliteexplorer.presentation.util.formatCost
+import com.bcan.satelliteexplorer.presentation.util.formatDate
 
 @Composable
 fun SatelliteDetailScreen(
@@ -43,8 +45,8 @@ fun SatelliteDetailScreen(
     SatelliteContent {
         id?.let {
             LaunchedEffect(key1 = it) {
-                viewModel.getSatelliteDetail(it)
-                viewModel.getSatellitePositions(it)
+                viewModel getSatelliteDetail it
+                viewModel getSatellitePositions it
             }
         }
 
@@ -80,7 +82,7 @@ fun SatelliteDetailScreen(
 
                 satellite?.let { sat ->
                     Text(
-                        text = "${sat.firstFlight}", style = TextStyle(
+                        text = sat.firstFlight.formatDate(), style = TextStyle(
                             fontSize = 12.sp,
                             color = Color.Gray
                         )
@@ -92,7 +94,7 @@ fun SatelliteDetailScreen(
                     )
                     AnnotatedTitleValueText(
                         title = "Cost",
-                        value = "${sat.costPerLaunch}"
+                        value = sat.costPerLaunch.formatCost()
                     )
                 }
 
