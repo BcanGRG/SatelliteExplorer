@@ -43,7 +43,7 @@ class SatelliteDetailViewModel @Inject constructor(
     private val _currentPosition: MutableStateFlow<Positions?> = MutableStateFlow(Positions())
     val currentPosition = _currentPosition.asStateFlow()
 
-    fun getSatelliteDetail(id: Int) {
+    infix fun getSatelliteDetail(id: Int) {
         viewModelScope.launch {
             repository.getSatelliteDetail(id).collectLatest { result ->
                 when (result) {
@@ -73,7 +73,7 @@ class SatelliteDetailViewModel @Inject constructor(
         }
     }
 
-    fun getSatellitePositions(id: Int) {
+    infix fun getSatellitePositions(id: Int) {
         viewModelScope.launch {
             repository.getSatellitePositions(id).collectLatest { result ->
                 when (result) {
