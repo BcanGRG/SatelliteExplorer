@@ -2,7 +2,6 @@ package com.bcan.satelliteexplorer.presentation.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bcan.satelliteexplorer.data.model.Positions
 import com.bcan.satelliteexplorer.data.model.PositionsList
 import com.bcan.satelliteexplorer.data.model.SatelliteDetail
 import com.bcan.satelliteexplorer.data.repository.SatelliteRepository
@@ -39,9 +38,6 @@ class SatelliteDetailViewModel @Inject constructor(
 
     private val _positions: MutableStateFlow<PositionsState> = MutableStateFlow(PositionsState())
     val positions = _positions.asStateFlow()
-
-    private val _currentPosition: MutableStateFlow<Positions?> = MutableStateFlow(Positions())
-    val currentPosition = _currentPosition.asStateFlow()
 
     infix fun getSatelliteDetail(id: Int) {
         viewModelScope.launch {
