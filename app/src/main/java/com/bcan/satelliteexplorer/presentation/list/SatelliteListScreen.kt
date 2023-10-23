@@ -11,12 +11,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -51,10 +58,26 @@ fun SatelliteListScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
-            TextField(
+            OutlinedTextField(
                 value = searchText,
                 onValueChange = viewModel::onSearchTextChange,
-                placeholder = { Text(text = "Search Satellites") }
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                placeholder = { Text(text = "Search") },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = "Search Icon"
+                    )
+                },
+                shape = RoundedCornerShape(30.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    cursorColor = Color.Black,
+                    focusedBorderColor = Color.Transparent,
+                    unfocusedBorderColor = Color.Transparent,
+                    backgroundColor = Color.White
+                )
             )
 
             uiState.errorMessage?.let {
@@ -153,4 +176,22 @@ fun SatelliteItem(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewSatelliteItemPassive() {
+    SatelliteItem(
+        satelliteName = "Starship-1",
+        isSatelliteActive = false,
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewSatelliteItemActive() {
+    SatelliteItem(
+        satelliteName = "Dragon-1",
+        isSatelliteActive = true,
+    )
 }
