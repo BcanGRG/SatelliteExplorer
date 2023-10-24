@@ -6,16 +6,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.bcan.satelliteexplorer.presentation.SplashScreen
 import com.bcan.satelliteexplorer.presentation.detail.SatelliteDetailScreen
 import com.bcan.satelliteexplorer.presentation.list.SatelliteListScreen
 
 @Composable
 fun SatellitesNavigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.ListScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.SplashScreen.route) {
 
         composable(route = Screen.SplashScreen.route) {
-            //SplashScreen(navController)
+            SplashScreen(navController)
         }
 
         composable(route = Screen.ListScreen.route) {
